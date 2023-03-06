@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import { googleRegister, registerEmailAndPassword } from "../service/firebaseService"
 import { Button } from "./Buttons/Buttons"
 import { useNavigate } from "react-router-dom"
+import imgRegister from '../assets/register.png'
 
 
 
@@ -15,14 +16,13 @@ export function Register({ }) {
 
     const navigate = useNavigate()
 
-    const goToWall = () => {
+    const goToProfile = () => {
         navigate('/wall')
     }
 
-    const goToWallGoogle = () => {
-        console.log(googleRegister())
+    const goToProfileGoogle = () => {
         googleRegister()
-        goToWall()
+        goToProfile()
     }
 
     const Submit = (e) => {
@@ -31,37 +31,43 @@ export function Register({ }) {
         registerEmailAndPassword(email, password)
             .then((res) => {
                 console.log(res)
-                goToWall()
+                goToProfile()
             }).catch((err) => {
                 alert(err.message)
             })
     }
 
     return (
-        <div>
+        <div className="container">
             <h1>
-                Hello in Register
+                DailyNotes
             </h1>
-            <form >
-                <h1>Registrate</h1>
-                <div id="name-container">
-                    <label htmlFor="name">Nombre:</label>
-                    <input type="text" placeholder="Ejemplo: David" id="name" name="user_name" onChange={(ev) => setName(ev.target.value)} />
-                </div>
+            <h2>REGISTRATE</h2>
 
-                <div id="mail-container">
-                    <label htmlFor="mail">Email:</label>
-                    <input type="email" placeholder='ejemplo@ejemplo.com' id="mail" name="user_email" onChange={(ev) => setEmail(ev.target.value)} />
-                </div>
+            <div className='conteiner-forms'>
+                <img src={imgRegister} alt="chica escribiendo" />
 
-                <div id="password-container">
-                    <label htmlFor="psw">Contraseña:</label>
-                    <input type='texto' placeholder='Ejemplo: david123' id="psw" name="user_password" onChange={(ev) => setPassword(ev.target.value)} />
-                </div>
+                <form className="forms" id='forms-register'>
+                    <div id="name-container">
+                        <label htmlFor="name">Nombre</label><br />
+                        <input type="text" placeholder="Ejemplo: David" id="name" name="user_name" onChange={(ev) => setName(ev.target.value)} />
+                    </div>
 
-                <Button texto={'Registrate'} manejarClick={Submit} />
-            </form>
-            <Button texto={'Ingresa con Google'} manejarClick={goToWallGoogle} />
+                    <div id="mail-container">
+                        <label htmlFor="mail">Correo</label> <br />
+                        <input type="email" placeholder='ejemplo@ejemplo.com' id="mail" name="user_email" onChange={(ev) => setEmail(ev.target.value)} />
+                    </div>
+
+                    <div id="password-container">
+                        <label htmlFor="psw">Contraseña</label><br />
+                        <input type='texto' placeholder='Ejemplo: david123' id="psw" name="user_password" onChange={(ev) => setPassword(ev.target.value)} />
+                    </div>
+
+                    <Button texto={'Registrate'} manejarClick={Submit} /> <br />
+                    <Button texto={'Ingresa con Google'} manejarClick={goToProfileGoogle} />
+                </form>
+            </div>
+
         </div>
     )
 }

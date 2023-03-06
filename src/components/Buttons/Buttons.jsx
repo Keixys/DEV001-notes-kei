@@ -1,3 +1,4 @@
+import './Buttons.css'
 
 export function Button({ texto, manejarClick }) {
     return (

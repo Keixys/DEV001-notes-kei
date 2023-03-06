@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import { Button } from "./Buttons/Buttons"
 import { useNavigate } from "react-router-dom"
-import { googleRegister,loginEmailAndPassword } from "../service/firebaseService"
+import { googleRegister,loginEmailAndPassword} from "../service/firebaseService"
+import imgLogin from '../assets/login.png'
 
 export function Login(){
 
@@ -22,7 +23,7 @@ export function Login(){
     
         const Submit = (e) => {
             e.preventDefault();
-            console.log(name, email, password)
+            console.log(email, password)
             loginEmailAndPassword(email, password)
                 .then((res) => {
                     console.log(res)
@@ -33,13 +34,17 @@ export function Login(){
         }
     
         return (
-            <div>
+            <div className="container">
                 <h1>
-                    Hello in Login 
-                </h1>
-                <form >
-                    <h1>Inicia Sesión</h1>
-                    
+                   DailyNote
+                </h1> <br />
+                <h2>INICIA SESIÓN</h2>
+
+                <div className="conteiner-forms">
+
+                <img src={imgLogin} alt="chico  en la computdora" />
+                <form id="forms-login">
+
                     <div id="mail-container">
                         <label htmlFor="mail">Email:</label>
                         <input type="email" placeholder='ejemplo@ejemplo.com' id="mail" name="user_email" onChange={(ev) => setEmail(ev.target.value)} />
@@ -49,10 +54,13 @@ export function Login(){
                         <label htmlFor="psw">Contraseña:</label>
                         <input type='texto' placeholder='Ejemplo: david123' id="psw" name="user_password" onChange={(ev) => setPassword(ev.target.value)} />
                     </div>
-    
-                    <Button texto={'Inicia Sesión'} manejarClick={Submit} />
+                    <div className="buttons">
+                    <Button texto={'Inicia Sesión'} manejarClick={Submit} /> <br />
+                    <Button texto={'Ingresa con Google'} manejarClick={goToWallGoogle} />
+                    </div>
                 </form>
-                <Button texto={'Ingresa con Google'} manejarClick={goToWallGoogle} />
+                </div>
+              
             </div>
     )
 }
